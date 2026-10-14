@@ -1,8 +1,15 @@
 export const BASE_URL = 'https://smailpro.com';
 export const API_SONJJ_URL = 'https://api.sonjj.com/v1';
 export const SITE_KEY = '0x4AAAAAAABIS_gEec2IwOhI';
-export const DEFAULT_API_KEY =
-  process.env.SMIALPRO_TURNSTILE_API_KEY || 'takashi0927192';
+
+// Legacy Fgsi endpoint defaults (kept for fallback)
+export const DEFAULT_FGSI_API_KEY =
+  process.env.FGSI_API_KEY || 'takashi0927192';
+
+// CapSolver is the default solver. Set SOLVER_PROVIDER to switch.
+export const SOLVER_PROVIDER = (process.env.SOLVER_PROVIDER || 'capsolver').toLowerCase();
+export const CAPSOLVER_KEY = process.env.CAPSOLVER_KEY || '';
+export const TWOCAPTCHA_KEY = process.env.TWOCAPTCHA_KEY || '';
 
 export const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
