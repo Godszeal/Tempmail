@@ -1,36 +1,11 @@
 import {
   BASE_URL,
   API_SONJJ_URL,
-  SITE_KEY,
-  DEFAULT_API_KEY,
   DEFAULT_USER_AGENT,
   DOMAINS
 } from './constants.js';
 
-async function solveTurnstile(action = 'smailpro_create', options = {}) {
-  const apiKey = options.apiKey || DEFAULT_API_KEY;
-  const siteKey = options.siteKey || SITE_KEY;
-  const targetUrl = options.targetUrl || `${BASE_URL}/temporary-email`;
-
-  const solverUrl = `https://fgsi.dpdns.org/api/tools/cfclearance/turnstile-min?apikey=${encodeURIComponent(
-    apiKey
-  )}&url=${encodeURIComponent(targetUrl)}&sitekey=${encodeURIComponent(
-    siteKey
-  )}&action=${encodeURIComponent(action)}`;
-
-  const res = await fetch(solverUrl);
-  if (!res.ok) {
-    throw new Error(`Turnstile solver failed (${res.status})`);
-  }
-
-  const data = await res.json();
-  const token = data.data?.token;
-  if (!token) {
-    throw new Error('Turnstile solver did not return a valid token');
-  }
-
-  return token;
-}
+import { solveTurnstile } from './solvers.js';
 
 async function getSessionCookies(userAgent = DEFAULT_USER_AGENT) {
   const res = await fetch(`${BASE_URL}/temporary-email`, {
